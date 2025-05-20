@@ -4,7 +4,7 @@ const cors = require('cors');
 const { setupDatabase } = require('./config/database');
 const authRoutes = require('./routes/auth');
 const clientRoutes = require('./routes/clients');
-const { errorHandler } = require('./middleware/errorHandler');
+const errorHandler = require('./middleware/errorHandler');
 const logger = require('./utils/logger');
 
 const app = express();
