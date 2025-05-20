@@ -1,0 +1,51 @@
+{
+    "EnvironmentName": "crm-production",
+    "SolutionStackName": "64bit Amazon Linux 2 v5.8.0 running Node.js 14",
+    "OptionSettings": [
+      {
+        "Namespace": "aws:autoscaling:launchconfiguration",
+        "OptionName": "IamInstanceProfile",
+        "Value": "aws-elasticbeanstalk-ec2-role"
+      },
+      {
+        "Namespace": "aws:elasticbeanstalk:environment",
+        "OptionName": "EnvironmentType",
+        "Value": "SingleInstance"
+      },
+      {
+        "Namespace": "aws:elasticbeanstalk:application:environment",
+        "OptionName": "NODE_ENV",
+        "Value": "production"
+      },
+      {
+        "Namespace": "aws:elasticbeanstalk:application:environment",
+        "OptionName": "PORT",
+        "Value": "8081"
+      },
+      {
+        "Namespace": "aws:elasticbeanstalk:application:environment",
+        "OptionName": "DB_HOST",
+        "Value": "your-db-host"
+      },
+      {
+        "Namespace": "aws:elasticbeanstalk:application:environment",
+        "OptionName": "DB_USER",
+        "Value": "your-db-user"
+      },
+      {
+        "Namespace": "aws:elasticbeanstalk:application:environment",
+        "OptionName": "DB_PASSWORD",
+        "Value": "your-db-password"
+      },
+      {
+        "Namespace": "aws:elasticbeanstalk:application:environment",
+        "OptionName": "DB_NAME",
+        "Value": "your-db-name"
+      },
+      {
+        "Namespace": "aws:elasticbeanstalk:application:environment",
+        "OptionName": "JWT_SECRET",
+        "Value": "your-jwt-secret"
+      }
+    ]
+}
