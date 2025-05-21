@@ -1,15 +1,9 @@
-const { validationResult } = require('express-validator');
 const AuthService = require('../services/authService');
 const logger = require('../utils/logger');
 
 class AuthController {
   static async login(req, res) {
     try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-      }
-
       const { email, password } = req.body;
       const result = await AuthService.login(email, password);
       res.json(result);
@@ -24,11 +18,6 @@ class AuthController {
 
   static async register(req, res) {
     try {
-      const errors = validationResult(req);
-      if (!errors.isEmpty()) {
-        return res.status(400).json({ errors: errors.array() });
-      }
-
       const user = await AuthService.register(req.body);
       res.status(201).json(user);
     } catch (error) {
