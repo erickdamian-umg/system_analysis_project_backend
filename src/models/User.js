@@ -9,8 +9,9 @@ class User {
         if (err) {
           logger.error('Error finding user by email:', err);
           reject(err);
+          return;
         }
-        resolve(user);
+        resolve(user || null);
       });
     });
   }
@@ -27,6 +28,7 @@ class User {
           if (err) {
             logger.error('Error creating user:', err);
             reject(err);
+            return;
           }
           resolve({ id: this.lastID, email });
         }

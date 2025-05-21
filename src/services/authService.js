@@ -17,7 +17,7 @@ class AuthService {
 
       const token = jwt.sign(
         { userId: user.id },
-        process.env.JWT_SECRET,
+        process.env.JWT_SECRET || 'your-secret-key',
         { expiresIn: '24h' }
       );
 
@@ -36,13 +36,20 @@ class AuthService {
 
   static async register(userData) {
     try {
+      if (!userData.email || !userData.password) {
+        throw new Error('Email and password are required');
+      }
+
       const existingUser = await User.findByEmail(userData.email);
       if (existingUser) {
         throw new Error('Email already registered');
       }
 
       const user = await User.create(userData);
-      return user;
+      return {
+        id: user.id,
+        email: user.email
+      };
     } catch (error) {
       logger.error('Registration error:', error);
       throw error;
