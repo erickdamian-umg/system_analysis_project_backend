@@ -22,6 +22,7 @@ const db = new sqlite3.Database(dbPath, (err) => {
 
 const setupDatabase = async () => {
     return new Promise((resolve, reject) => {
+        logger.info('Starting database setup...');
         db.serialize(() => {
             // Create users table
             db.run(`
@@ -31,7 +32,14 @@ const setupDatabase = async () => {
                     password TEXT NOT NULL,
                     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
                 )
-            `);
+            `, (err) => {
+                if (err) {
+                    logger.error('Error creating users table:', err);
+                    reject(err);
+                    return;
+                }
+                logger.info('Users table created/verified successfully');
+            });
 
             // Create clients table
             db.run(`
@@ -46,7 +54,14 @@ const setupDatabase = async () => {
                     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
                     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
                 )
-            `);
+            `, (err) => {
+                if (err) {
+                    logger.error('Error creating clients table:', err);
+                    reject(err);
+                    return;
+                }
+                logger.info('Clients table created/verified successfully');
+            });
 
             // Insert default user if not exists
             const defaultEmail = 'admin@example.com';
@@ -75,6 +90,7 @@ const setupDatabase = async () => {
                         }
                     );
                 } else {
+                    logger.info('Default user already exists');
                     resolve();
                 }
             });
