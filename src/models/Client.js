@@ -47,7 +47,7 @@ class Client {
     const { name, email, phone, address, company } = clientData;
     return new Promise((resolve, reject) => {
       db.run(
-        'UPDATE clients SET name = ?, email = ?, phone = ?, address = ?, company = ? WHERE id = ?',
+        'UPDATE clients SET name = ?, email = ?, phone = ?, address = ?, company = ?, updated_at = CURRENT_TIMESTAMP WHERE id = ?',
         [name, email, phone, address, company, id],
         function(err) {
           if (err) {

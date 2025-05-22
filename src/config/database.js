@@ -40,6 +40,7 @@ const setupDatabase = async () => {
                     name TEXT NOT NULL,
                     email TEXT UNIQUE,
                     phone TEXT,
+                    address TEXT,
                     company TEXT,
                     status TEXT DEFAULT 'active',
                     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
