@@ -37,6 +37,11 @@ class ClientController {
       res.status(201).json(client);
     } catch (error) {
       logger.error('Create client controller error:', error);
+      if (error.code === 'SQLITE_CONSTRAINT' && error.message.includes('UNIQUE constraint failed: clients.email')) {
+        return res.status(400).json({ 
+          message: 'A client with this email address already exists' 
+        });
+      }
       res.status(500).json({ message: 'Internal server error' });
     }
   }
